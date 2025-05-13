@@ -28,6 +28,7 @@ body {
     height: 100vh;
     position: fixed;
     transition: all 0.3s;
+    z-index: 1000;
 }
 
 .sidebar-header {
@@ -225,4 +226,109 @@ body {
     background-color: #d4edda;
     border-radius: 4px;
     margin-bottom: 15px;
+}
+
+/* Hamburger menu */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+/* Media queries para dispositivos móviles */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .libro-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .libro-info {
+        margin-bottom: 10px;
+    }
+    
+    .libro-actions {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media screen and (max-width: 480px) {
+    .card {
+        padding: 15px 10px;
+    }
+    
+    .search-container {
+        padding: 10px;
+    }
+    
+    .libro-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .libro-actions .btn {
+        width: 100%;
+    }
+}
+
+/* Para evitar que el contenido se desplace cuando se activa el menú */
+body.menu-active {
+    overflow: hidden;
+}
+
+/* Overlay para oscurecer el fondo cuando el menú está activo */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+}
+
+.overlay.active {
+    display: block;
 }

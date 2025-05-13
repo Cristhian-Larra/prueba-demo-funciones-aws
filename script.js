@@ -332,4 +332,46 @@ document.addEventListener('DOMContentLoaded', () => {
         librosList.innerHTML = '<p>Error de conexión con el servidor. Verifique la configuración CORS en API Gateway.</p>';
         eliminarLibrosList.innerHTML = '<p>Error de conexión con el servidor. Verifique la configuración CORS en API Gateway.</p>';
     });
+
+    const menuToggle = document.createElement('button');
+    menuToggle.className = 'menu-toggle';
+    menuToggle.innerHTML = '☰';
+    document.body.appendChild(menuToggle);
+    
+    const sidebar = document.querySelector('.sidebar');
+    
+    // Crear overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+    document.body.appendChild(overlay);
+    
+    // Función para alternar el menú
+    function toggleMenu() {
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+        document.body.classList.toggle('menu-active');
+    }
+    
+    // Event listeners
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+    
+    // Cerrar el menú al hacer clic en un elemento del menú en dispositivos móviles
+    const menuItems = document.querySelectorAll('.menu-items li');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                toggleMenu();
+            }
+        });
+    });
+    
+    // Ajustar cuando se redimensiona la ventana
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('menu-active');
+        }
+    });
 });
